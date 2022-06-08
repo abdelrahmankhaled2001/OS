@@ -79,7 +79,7 @@ public class OS {
 				processesPCBs.put(p, PCB);
 				outPut.add(p + " has been added to the main memory for the first time");
 			}
-			
+			mySystemCallHandler.printOnScreen("Currently running process: " + running);
 			if (running != null) {
 				if (!onMemory.contains(running)) {
 					putOnMemory(running, myMemory, myParser.getProcess(running.toString()));
@@ -141,10 +141,6 @@ public class OS {
 	}
 
 	
-	
-	
-	
-	
 	public void decideNextRunningProcess(Memory myMemory) {
 		Process oldRunning = running;
 		Process newRunning = myScheduler.getNext(running, readyQueue);
@@ -163,14 +159,7 @@ public class OS {
 			mySystemCallHandler.printOnScreen(running.toString() + " has been chosen");
 			printQueues();
 		}
-	}
-
-	
-	
-	
-	
-	
-	
+	}	
 	public void executeNextInstruction(Memory myMemory) {
 		String instruction = getNextInstruction(running, myMemory);
 		String[] instParts = instruction.split(" ");
@@ -256,7 +245,7 @@ public class OS {
 		Pair currLine = mySystemCallHandler.checkMemory(next, myMemory);
 		if (next == upperBound - 3)
 			p.setFinished(true);
-		return (String) currLine.value;
+		return  (String) currLine.value;
 	}
 
 	
@@ -392,7 +381,7 @@ public class OS {
 		System.out.println("Main memory Data:  ");
 		Pair[] memory = myMemory.getMainMemory();
 		for (int i = 0; i < 40; i++) {
-			System.out.println("Cell "+ i+" : "+memory[i]);
+			System.out.println("Cell "+ ((i<10)?"0"+i:i)+" : "+((memory[i]==null)?"Empty":memory[i]));
 		}
 	}
 

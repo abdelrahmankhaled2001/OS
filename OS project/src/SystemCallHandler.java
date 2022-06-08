@@ -16,10 +16,13 @@ public class SystemCallHandler {
 		try {
 			File f = new File(directory + ".txt");
 			Scanner r = new Scanner(f);
+			if (r.hasNextLine())
+			file += r.nextLine();
 
-			while (r.hasNextLine()) {
-				file += r.nextLine() + "\n";
-			}
+			while (r.hasNextLine()) 
+				file +="\n"+ r.nextLine();
+						
+		
 			r.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found!!");
